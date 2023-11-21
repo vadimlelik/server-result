@@ -16,7 +16,6 @@ router.post('/login', async (req, res) => {
 })
 router.post('/register', async (req, res) => {
     try {
-
         const { user, token } = await addUser(req.body.email, req.body.password);
         res.cookie('token', token).send({ accessToken: token, user })
 
@@ -28,7 +27,11 @@ router.post('/register', async (req, res) => {
 }
 )
 router.get('/logout', (req, res) => {
-    res.cookie('token', '', { httpOnly: true })
+   try {
+       res.cookie('token', '', { httpOnly: true }).send({message:'OK'})
+   } catch (e){
+
+   }
 })
 
 

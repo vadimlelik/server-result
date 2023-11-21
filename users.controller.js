@@ -1,16 +1,22 @@
 const User = require('./models/User')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('./constants');
+const {JWT_SECRET} = require('./constants');
 
 async function addUser(email, password) {
+
     const passwordHash = await bcrypt.hash(password, 10)
-    await User.create({ email, password: passwordHash });
+
+    const token = jwt.sign({email}, JWT_SECRET, {expiresIn: '30d'});
+    const user = await User.create({email, password: passwordHash});
+
+    return {
+        token, user
+    }
 }
 
 async function loginUser(email, password) {
-    const user = await User.findOne({ email })
-
+    const user = await User.findOne({email})
     if (!user) {
         throw new Error('User is not found')
     }
@@ -20,7 +26,7 @@ async function loginUser(email, password) {
     if (!isPasswordCorrect) {
         throw new Error('Wrong password')
     }
-    const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: '30d' });
+    const token = jwt.sign({email}, JWT_SECRET, {expiresIn: '30d'});
 
     return {
         token,
@@ -28,4 +34,4 @@ async function loginUser(email, password) {
     }
 }
 
-module.exports = { addUser, loginUser }
+module.exports = {addUser, loginUser}
