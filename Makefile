@@ -15,3 +15,11 @@ backend:
 		backend-notes
 
 
+SSH_STRING:=root@83.147.245.222
+
+ssh:
+	ssh $(SSH_STRING)
+
+copy-files:
+	scp -r ./*  $(SSH_STRING):/root/app
+		
