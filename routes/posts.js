@@ -1,6 +1,6 @@
-const {Router} = require('express')
-const {loginUser, addUser} = require("../users.controller");
-const {addNote, getNotes} = require("../notes.controller");
+const { Router } = require('express')
+const { loginUser, addUser } = require("../users.controller.js");
+const { addNote, getNotes } = require("../notes.controller");
 const auth = require('../middlewares/auth')
 
 

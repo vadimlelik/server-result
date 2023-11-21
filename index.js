@@ -25,7 +25,7 @@ app.use('/api/auth', authRoute)
 app.use('/api/posts/', postRoute)
 
 
-mongoose.connect("mongodb://mongodb:27017/testdb").then(() => {
+mongoose.connect("mongodb://localhost:27017/testdb").then(() => {
     app.listen(port, () => {
         console.log(chalk.green(`Server has been started on port ${port}...`))
     })
