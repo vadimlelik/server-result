@@ -25,16 +25,16 @@ app.use('/api/auth', authRoute)
 app.use('/api/posts', postRoute)
 
 
-// mongoose.connect("mongodb://mongodb:27017/testdb").then(() => {
-//     app.listen(port, () => {
-//         console.log(chalk.green(`Server has been started on port ${port}...`))
-//     })
-// })
-mongoose.connect("mongodb://localhost:27017/testdb").then(() => {
+mongoose.connect("mongodb://mongodb:27017/testdb").then(() => {
     app.listen(port, () => {
         console.log(chalk.green(`Server has been started on port ${port}...`))
     })
 })
+// mongoose.connect("mongodb://localhost:27017/testdb").then(() => {
+//     app.listen(port, () => {
+//         console.log(chalk.green(`Server has been started on port ${port}...`))
+//     })
+// })
 
 // mongodb://176.57.213.226:27017/testbd
 // docker run --rm --name mongo -p 27017:27017 -d \
